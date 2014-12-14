@@ -1,27 +1,32 @@
-from sys import exit
+def quiz():
 
-number_of_code_lines = raw_input('Hany sor kodot irtal az evben? ')
+    ret = {'number_of_code_lines': 'unknown',
+           'member': 'unknown',
+           'paid_member': 'unknown'}
 
-if not number_of_code_lines.isdigit():
-    print('Egesz szam megadasa kotelezo')
-    exit(1)
+    number_of_code_lines = raw_input('Hany sor kodot irtal az evben? ')
+    if not number_of_code_lines.isdigit():
+        print('Egesz szam megadasa kotelezo')
+        return ret
 
-number_of_code_lines = int(number_of_code_lines)
+    ret['number_of_code_lines'] = int(number_of_code_lines)
 
-if number_of_code_lines < 1000:
-    print('kodolj tovabb')
-    exit(0)
+    if ret['number_of_code_lines'] < 1000:
+        print('kodolj tovabb')
+        return ret
 
-is_member = raw_input('Tag vagy (y/n)? ').strip().lower() == 'y'
+    ret['member'] = raw_input('Tag vagy (y/n)? ').strip().lower() == 'y'
 
-if not is_member:
-    print('Mar csak tagga kell valnod')
-    exit(0)
+    if not ret['member']:
+        print('Mar csak tagga kell valnod')
+        ret['paid_member'] = False
+        return ret
 
-paid = raw_input('Fizettel a honapban tagdijat (y/n)? ').lower() == 'y'
+    ret['paid_member'] = raw_input('Fizettel a honapban tagdijat (y/n)?').lower() == 'y'
 
-if paid:
-    print('Wohoo')
-    exit(0)
+    if ret['paid_member']:
+        print('Wohoo')
+    else:
+        print('meeh')
 
-print('meeh')
+    return ret
